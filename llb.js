@@ -6,6 +6,7 @@
 // 多用户用&或者@隔开
 // 例如账号1：10086 账号2： 1008611
 // 则变量为10086&1008611
+
 var https = require('https');
 
 // 从青龙面板的环境变量获取用户信息
@@ -18,7 +19,7 @@ if (process.env.llb_cookie) {
         if (id && token) {
             return {
                 id: id.trim(),
-                token: Bearer ${token.trim()}
+                token: `Bearer ${token.trim()}`
             };
         }
     }).filter(Boolean);
@@ -32,7 +33,7 @@ let everyDaySend = function () {
     const y = date.getFullYear();
     const m = date.getMonth() + 1;
     const d = date.getDate();
-    const t = ${y}-${m}-${d} 07:56:19;
+    const t = `${y}-${m}-${d} 07:56:19`;
     
     console.log("当前时间:", t);
 
@@ -60,12 +61,12 @@ let everyDaySend = function () {
         const req = https.request(options, (res) => {
             let data = '';
             res.on('data', (chunk) => { data += chunk; });
-            res.on('end', () => { console.log(${item.id} 调用情况: , data); });
+            res.on('end', () => { console.log(`${item.id} 调用情况: `, data); });
         });
 
         req.write(postData);
         req.end();
-        req.on('error', (e) => { console.error(调用失败: ${e.message}); });
+        req.on('error', (e) => { console.error(`调用失败: ${e.message}`); });
     });
 
     setTimeout(() => { everyDaySend(); }, 1000 * 60 * 60 * 24);
