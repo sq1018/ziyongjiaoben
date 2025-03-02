@@ -1,3 +1,15 @@
+
+/*
+* 定时自定义
+* 邻里邦签到
+* 打开app抓去m-center-prod-linli.timesgroup.cn的 memberId和authorization填到变量llb_cookie就行 authorization要去掉前面的brerar id和token用｜隔开 
+* 支持多用户运行
+* 多用户用&或者@隔开
+* 例如账号1：10086 账号2： 1008611
+* 则变量为10086&1008611
+*/
+
+const $ = new Env('邻里邦签到');
 var https = require('https');
 
 // 从青龙面板的环境变量获取用户信息
