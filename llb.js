@@ -1,4 +1,3 @@
-
 /*
  * @name 邻里邦签到
  * @cron 0 8 * * *
@@ -31,13 +30,14 @@ if (process.env.llb_cookie) {
     process.exit(1);
 }
 
-let everyDaySend = function () {
+// 执行签到
+function signIn() {
     const date = new Date();
     const y = date.getFullYear();
     const m = date.getMonth() + 1;
     const d = date.getDate();
     const t = `${y}-${m}-${d} 07:56:19`;
-    
+
     console.log("当前时间:", t);
 
     users.forEach((item) => {
@@ -51,7 +51,7 @@ let everyDaySend = function () {
 
         let options = {
             hostname: 'm-center-prod-linli.timesgroup.cn',
-            path: '/times/member-bff/user-behaviour//api-c/v1/user-behaviour/collect',
+            path: '/times/member-bff/user-behaviour/api-c/v1/user-behaviour/collect',  // 修正路径
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -71,8 +71,7 @@ let everyDaySend = function () {
         req.end();
         req.on('error', (e) => { console.error(`调用失败: ${e.message}`); });
     });
+}
 
-    setTimeout(() => { everyDaySend(); }, 1000 * 60 * 60 * 24);
-};
-
-everyDaySend();
+// 直接执行一次，青龙会自动按照 @cron 规则定时执行
+signIn();
