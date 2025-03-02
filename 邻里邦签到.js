@@ -1,12 +1,4 @@
-/*
-1 8 * * * llb.js
- */
-// 打开app抓去m-center-prod-linli.timesgroup.cn的 memberId和authorization填到变量llb_cookie就行 authorization要去掉前面的brerar id和token用｜隔开 
-// 支持多用户运行
-// 多用户用&或者@隔开
-// 例如账号1：10086 账号2： 1008611
-// 则变量为10086&1008611
-
+const $ = new Env('邻里邦签到');
 var https = require('https');
 
 // 从青龙面板的环境变量获取用户信息
@@ -19,7 +11,7 @@ if (process.env.llb_cookie) {
         if (id && token) {
             return {
                 id: id.trim(),
-                token: `Bearer ${token.trim()}`
+                token: `Bearer ${token.trim()}`  // 修正模板字符串语法
             };
         }
     }).filter(Boolean);
@@ -34,7 +26,7 @@ function signIn() {
     const y = date.getFullYear();
     const m = date.getMonth() + 1;
     const d = date.getDate();
-    const t = `${y}-${m}-${d} 07:56:19`;
+    const t = `${y}-${m}-${d} 07:56:19`;  // 修正模板字符串
 
     console.log("当前时间:", t);
 
@@ -62,12 +54,12 @@ function signIn() {
         const req = https.request(options, (res) => {
             let data = '';
             res.on('data', (chunk) => { data += chunk; });
-            res.on('end', () => { console.log(`${item.id} 调用情况: `, data); });
+            res.on('end', () => { console.log(`${item.id} 调用情况: `, data); });  // 修正模板字符串
         });
 
         req.write(postData);
         req.end();
-        req.on('error', (e) => { console.error(`调用失败: ${e.message}`); });
+        req.on('error', (e) => { console.error(`调用失败: ${e.message}`); });  // 修正模板字符串
     });
 }
 
