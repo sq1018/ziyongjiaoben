@@ -1,14 +1,11 @@
 /*
- * 打开app抓去m-center-prod-linli.timesgroup.cn的 memberId和authorization填到变量llb_cookie就行 authorization要去掉前面的brerar id和token用｜隔开 
- * 支持多用户运行
- * 多用户用&或者@隔开
- * 例如账号1：10086 账号2： 1008611
- * 则变量为10086&1008611
+1 8 * * * llb.js
  */
-
-// @name 邻里邦签到
-// @cron 1 8 * * *
-// @desc 自动签到邻里邦
+// 打开app抓去m-center-prod-linli.timesgroup.cn的 memberId和authorization填到变量llb_cookie就行 authorization要去掉前面的brerar id和token用｜隔开 
+// 支持多用户运行
+// 多用户用&或者@隔开
+// 例如账号1：10086 账号2： 1008611
+// 则变量为10086&1008611
 
 var https = require('https');
 
